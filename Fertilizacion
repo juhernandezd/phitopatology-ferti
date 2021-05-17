@@ -1,0 +1,396 @@
+## Pesos moleculares elementos
+
+oxigeno_peso = 15.9994
+carbono_peso = 12.0107 
+hidrogeno_peso = 1.00794 
+nitrogeno_peso = 14.0067 
+fosforo_peso = 30.973762 
+potasio_peso = 39.0983 
+magnesio_peso = 24.3050 
+calcio_peso = 40.078 
+azufre_peso = 32.065 
+boro_peso = 10.811 
+cobre_peso = 63.546 
+zinc_peso = 65.38 
+silicio_peso = 28.0855 
+sodio_peso = 22.9897 
+cloro_peso = 35.453
+
+## Soluciones Bases o soluciones Madre
+
+nitrato_calcio = [calcio_peso,nitrogeno_peso*2,oxigeno_peso*6]
+nitrato_potasio = [potasio_peso,nitrogeno_peso]
+sulfato_magnesio = [magnesio_peso,azufre_peso]
+difosfato_potasio = [potasio_peso*2,fosforo_peso]
+cloruro_magnesio = [magnesio_peso,cloro_peso*2]
+sulfato_sodio = [sodio_peso*2,azufre_peso]
+cloruro_calcio = [calcio_peso,cloro_peso*2]
+cloruro_potasio = [potasio_peso,cloro_peso]
+fosfato_calcio = [calcio_peso,fosforo_peso]
+cloruro_sodio = [sodio_peso,cloro_peso]
+acido_fosfo = [fosforo_peso]
+nitrato_amonio = [nitrogeno_peso*2,oxigeno_peso*3]
+acido_borico = [boro_peso]
+sulfato_amonio = [nitrogeno_peso*2,azufre_peso]
+nitrato_magnesio = [magnesio_peso,nitrogeno_peso*2]
+
+volumen_ep = float(input("Ingrese volumen evaporado por matera en ml: "))
+frecuencia_fer = float(input("Ingrese frecencia de fertirriego por semana: "))
+duracion_exp = float(input("Ingrese la cantidad de semanas que dura el fertirriego: "))
+vol_ferti = volumen_ep * frecuencia_fer * duracion_exp
+print("El volumen de fertirriego para todo el ciclo es: ",vol_ferti,"ml")
+
+cant_plant = float(input("Ingrese la cantidad de plantas utilizadas: "))
+
+## Inicio de la función
+nutriente =["Nitrógeno","nitrógeno","N","Fósforo","fosforo","P","Potasio","potasio","K","Mg","Magnesio","magnesio","Calcio","calcio","Ca","B","boro","Boro","Na","sodio","Sodio","Cl","Cloro","cloro","S","Azufre","azufre","Cu","Cobre","cobre","Si","Silicio","silicio","Fe","Hierro","hierro"]
+nutri = "NA"
+while nutri not in nutriente:
+    print("Nutrientes disponibles: N, P, K, Mg, Ca, Zn, B, Na, Cl, S, Cu, Si")
+    nutri = str(input("Indique el nuetriente a evaluar:"))
+    if nutri == "Nitrógeno" or nutri == "N" or nutri == "nitrógeno":
+        ppm_N = float(input("Ingrese ppm de Nitrogeno a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Nitrato de calcio tetrahidratado":
+            v_1_nc = ((vol_ferti/1000) * ppm_N) / (nitrato_calcio[1]*1000)
+            v_1_nc = v_1_nc * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_nc,"ml")
+            v_1_nc1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (nitrato_calcio[1]*1000)
+            v_1_nc1 = v_1_nc1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_nc1,"ml")
+            c_2_nc = ((v_1_nc1/1000) * (nitrato_calcio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_nc,"mg/l de calcio")
+            nutri = "NA"
+
+        elif base_madre == "Nitrato de amonio":
+            v_1_a = ((vol_ferti/1000) * ppm_N) / (nitrato_amonio[0]*1000)
+            v_1_a = v_1_a * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_a,"ml")
+            v_1_a1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (nitrato_amonio[0]*1000)
+            v_1_a1 = v_1_a1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_a1,"ml")
+            nutri = "NA"
+    
+        elif base_madre == "Nitrato de potasio":
+            v_1_np = ((vol_ferti/1000) * ppm_N) / (nitrato_potasio[1]*1000)
+            v_1_np = v_1_np * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_np,"ml")
+            v_1_np1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (nitrato_potasio[1]*1000)
+            v_1_np1 = v_1_np1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_np1,"ml")
+            c_2_np = ((v_1_np1/1000) * (nitrato_potasio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_np,"mg/l de potasio")
+            nutri = "NA"
+
+        elif base_madre == "Sulfato de amonio":
+            v_1_sa = ((vol_ferti/1000) * ppm_N) / (sulfato_amonio[0]*1000)
+            v_1_sa = v_1_sa * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_sa,"ml")
+            v_1_sa1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (sulfato_amonio[0]*1000)
+            v_1_sa1 = v_1_sa1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_sa1,"ml")
+            c_2_sa = ((v_1_np1/1000) * (sulfato_amonio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_sa,"mg/l de azufre")
+            nutri = "NA"
+    
+        elif base_madre == "Nitrato de magnesio":
+            v_1_nm = ((vol_ferti/1000) * ppm_N) / (nitrato_magnesio[1]*1000)
+            v_1_nm = v_1_nm * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_nm,"ml")
+            v_1_nm1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (nitrato_magnesio[1]*1000)
+            v_1_nm1 = v_1_nm1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_nm1,"ml")
+            c_2_nm = ((v_1_nm1/1000) * (nitrato_magnesio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_nm,"mg/l de magnesio")
+            nutri = "NA"
+    
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+    
+    elif nutri == "Fósforo" or nutri == "P" or nutri == "fósforo":
+        ppm_P = float(input("Ingrese ppm de Fósforo a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Difosfato de potasio":
+            v_1_dp = ((vol_ferti/1000) * ppm_P) / (difosfato_potasio[1]*1000)
+            v_1_dp = v_1_dp * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_dp,"ml")
+            v_1_dp1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (difosfato_potasio[1]*1000)
+            v_1_dp1 = v_1_dp1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_dp1,"ml")
+            c_2_dp = ((v_1_dp1/1000) * (difosfato_potasio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_dp,"mg/l de potasio")
+            nutri = "NA"
+            
+        elif base_madre == "Fosfato ácido de calcio":
+            v_1_fc = ((vol_ferti/1000) * ppm_P) / (fosfato_calcio[1]*1000)
+            v_1_fc = v_1_fc * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_fc,"ml")
+            v_1_fc1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (fosfato_calcio[1]*1000)
+            v_1_fc1 = v_1_fc1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_fc1,"ml")
+            c_2_fc = ((v_1_fc1/1000) * (fosfato_calcio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_fc,"mg/l de calcio")
+            nutri = "NA" 
+        
+        elif base_madre == "Ácido fosfórico":
+            v_1_af = ((vol_ferti/1000) * ppm_P) / (acido_fosfo[0]*1000)
+            v_1_af = v_1_af * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_af,"ml")
+            v_1_af1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (acido_fosfo[0]*1000)
+            v_1_af1 = v_1_af1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_af1,"ml")
+            nutri = "NA"
+        
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+            
+    elif nutri == "Cloro" or nutri == "Cl" or nutri == "calcio":
+        ppm_P = float(input("Ingrese ppm de Cloro a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Cloruro de calcio":
+            v_1_cc = ((vol_ferti/1000) * ppm_P) / (cloruro_calcio[1]*1000)
+            v_1_cc = v_1_cc * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_cc,"ml")
+            v_1_cc1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_calcio[1]*1000)
+            v_1_cc1 = v_1_cc1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_cc1,"ml")
+            c_2_cc = ((v_1_cc1/1000) * (cloruro_calcio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_cc,"mg/l de calcio")
+            nutri = "NA"
+            
+        elif base_madre == "Cloruro de sodio":
+            v_1_cs = ((vol_ferti/1000) * ppm_P) / (cloruro_sodio[1]*1000)
+            v_1_cs = v_1_cs * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_cs,"ml")
+            v_1_cs1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_sodio[1]*1000)
+            v_1_cs1 = v_1_cs1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_cc1,"ml")
+            c_2_cs = ((v_1_cs1/1000) * (cloruro_sodio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_cs,"mg/l de sodio")
+            nutri = "NA"
+            
+        elif base_madre == "Cloruro de potasio":
+            v_1_cp = ((vol_ferti/1000) * ppm_P) / (cloruro_potasio[1]*1000)
+            v_1_cp = v_1_cp * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_cp,"ml")
+            v_1_cp1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_potasio[1]*1000)
+            v_1_cp1 = v_1_cp1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_cp1,"ml")
+            c_2_cp = ((v_1_cp1/1000) * (cloruro_potasio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_cp,"mg/l de potasio")
+            nutri = "NA"
+            
+        elif base_madre == "Cloruro de magnesio":
+            v_1_cm = ((vol_ferti/1000) * ppm_P) / (cloruro_magnesio[1]*1000)
+            v_1_cm = v_1_cm * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_cm,"ml")
+            v_1_cm1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_magnesio[1]*1000)
+            v_1_cm1 = v_1_cm1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_cm1,"ml")
+            c_2_cm = ((v_1_cm1/1000) * (cloruro_magnesio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_cm,"mg/l de magnesio")
+            nutri = "NA"
+        
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+            
+    elif nutri == "Boro" or nutri == "B" or nutri == "boro":
+        ppm_P = float(input("Ingrese ppm de Boro a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Ácido bórico":
+            v_1_ab = ((vol_ferti/1000) * ppm_P) / (acido_borico[0]*1000)
+            v_1_ab = v_1_ab * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_ab,"ml")
+            v_1_ab1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (acido_borico[0]*1000)
+            v_1_ab1 = v_1_ab1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_ab1,"ml")
+            nutri = "NA"
+            
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+            
+    elif nutri == "Sodio" or nutri == "Na" or nutri == "sodio":
+        ppm_P = float(input("Ingrese ppm de Sodio a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Cloruro de calcio":
+            v_1_css = ((vol_ferti/1000) * ppm_P) / (cloruro_sodio[0]*1000)
+            v_1_css = v_1_css * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_css,"ml")
+            v_1_css1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_sodio[0]*1000)
+            v_1_css1 = v_1_css1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_css1,"ml")
+            c_2_css = ((v_1_css1/1000) * (cloruro_sodio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_css,"mg/l de cloro")
+            nutri = "NA"
+            
+        elif base_madre == "Sulfato de sodio":
+            v_1_ss = ((vol_ferti/1000) * ppm_P) / (sulfato_sodio[0]*1000)
+            v_1_ss = v_1_ss * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_ss,"ml")
+            v_1_ss1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (sulfato_sodio[0]*1000)
+            v_1_ss1 = v_1_ss1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_ss1,"ml")
+            c_2_ss = ((v_1_ss1/1000) * (sulfato_sodio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_ss,"mg/l de azufre")
+            nutri = "NA"
+            
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+            
+    elif nutri == "Azufre" or nutri == "S" or nutri == "azufre":
+        ppm_P = float(input("Ingrese ppm de Azufre a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Sulfato de sodio":
+            v_1_sss = ((vol_ferti/1000) * ppm_P) / (sulfato_sodio[1]*1000)
+            v_1_sss = v_1_sss * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_sss,"ml")
+            v_1_sss1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (sulfato_sodio[1]*1000)
+            v_1_sss1 = v_1_sss1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_sss1,"ml")
+            c_2_sss = ((v_1_sss1/1000) * (sulfato_sodio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_sss,"mg/l de sodio")
+            nutri = "NA"
+            
+        elif base_madre == "Sulfato de amonio":
+            v_1_sam = ((vol_ferti/1000) * ppm_P) / (sulfato_amonio[1]*1000)
+            v_1_sam = v_1_sam * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_sam,"ml")
+            v_1_sam1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (sulfato_sodio[1]*1000)
+            v_1_sam1 = v_1_sam1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_sam1,"ml")
+            c_2_sam = ((v_1_sam1/1000) * (sulfato_sodio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_sam,"mg/l de nitrógeno")
+            nutri = "NA"
+            
+        elif base_madre == "Sulfato de magnesio":
+            v_1_sma = ((vol_ferti/1000) * ppm_P) / (sulfato_magnesio[1]*1000)
+            v_1_sma = v_1_sma * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_sma,"ml")
+            v_1_sma1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (sulfato_magnesio[1]*1000)
+            v_1_sma1 = v_1_sma1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_sma1,"ml")
+            c_2_sma = ((v_1_sma1/1000) * (sulfato_magnesio[0]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_sma,"mg/l de magnesio")
+            nutri = "NA"
+        
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+    
+    elif nutri == "Potasio" or nutri == "K" or nutri == "potasio":
+        ppm_P = float(input("Ingrese ppm de Potasio a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Cloruro de potasio":
+            v_1_cpo = ((vol_ferti/1000) * ppm_P) / (cloruro_potasio[0]*1000)
+            v_1_cpo = v_1_cpo * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_cpo,"ml")
+            v_1_cpo1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_potasio[0]*1000)
+            v_1_cpo1 = v_1_cpo1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_cpo1,"ml")
+            c_2_cpo = ((v_1_cpo1/1000) * (cloruro_potasio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_cpo,"mg/l de cloro")
+            
+        elif base_madre == "Difosfato de potasio":
+            v_1_dpo = ((vol_ferti/1000) * ppm_P) / (difosfato_potasio[0]*1000)
+            v_1_dpo = v_1_dpo * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_dpo,"ml")
+            v_1_dpo1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (difosfato_potasio[0]*1000)
+            v_1_dpo1 = v_1_dpo1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_dpo1,"ml")
+            c_2_dpo = ((v_1_dpo1/1000) * (difosfato_potasio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_dpo,"mg/l de fosforo")
+            nutri = "NA"
+            
+        elif base_madre == "Nitrato de potasio":
+            v_1_npo = ((vol_ferti/1000) * ppm_N) / (nitrato_potasio[0]*1000)
+            v_1_npo = v_1_npo * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_npo,"ml")
+            v_1_npo1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (nitrato_potasio[0]*1000)
+            v_1_npo1 = v_1_npo1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_npo1,"ml")
+            c_2_npo = ((v_1_npo1/1000) * (nitrato_potasio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_npo,"mg/l de nitrogeno")
+            nutri = "NA"     
+            
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+    
+    elif nutri == "Calcio" or nutri == "Ca" or nutri == "calcio":
+        ppm_P = float(input("Ingrese ppm de Calcio a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Cloruro de calcio":
+            v_1_cca = ((vol_ferti/1000) * ppm_P) / (cloruro_calcio[0]*1000)
+            v_1_cca = v_1_cca * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_cca,"ml")
+            v_1_cca1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_calcio[0]*1000)
+            v_1_cca1 = v_1_cca1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_cca1,"ml")
+            c_2_cca = ((v_1_cca1/1000) * (cloruro_calcio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_cca,"mg/l de cloro")
+            
+        elif base_madre == "Fosfato ácido de calcio":
+            v_1_fac = ((vol_ferti/1000) * ppm_P) / (fosfato_calcio[0]*1000)
+            v_1_fac = v_1_fac * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_fac,"ml")
+            v_1_fac1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (fosfato_calcio[0]*1000)
+            v_1_fac1 = v_1_fac1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_fac1,"ml")
+            c_2_fac = ((v_1_fac1/1000) * (fosfato_calcio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_fac,"mg/l de fosforo")
+            nutri = "NA"
+            
+        elif base_madre == "Nitrato de calcio tetrahidratado":
+            v_1_nca = ((vol_ferti/1000) * ppm_N) / (nitrato_calcio[0]*1000)
+            v_1_nca = v_1_nca * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_nca,"ml")
+            v_1_nca1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (nitrato_calcio[0]*1000)
+            v_1_nca1 = v_1_nca1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_nca1,"ml")
+            c_2_nca = ((v_1_nca1/1000) * (nitrato_calcio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_nca,"mg/l de nitrogeno")
+            nutri = "NA" 
+            
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+    
+    elif nutri == "Magnesio" or nutri == "Mg" or nutri == "magnesio":
+        ppm_P = float(input("Ingrese ppm de Magnesio a utilizar: "))
+        base_madre = str(input("Ingrese la base madre a utilizar: "))
+        if base_madre == "Cloruro de magnesio":
+            v_1_cmg = ((vol_ferti/1000) * ppm_P) / (cloruro_magnesio[0]*1000)
+            v_1_cmg = v_1_cmg * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_cmg,"ml")
+            v_1_cmg1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (cloruro_magnesio[0]*1000)
+            v_1_cmg1 = v_1_cmg1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_cmg1,"ml")
+            c_2_cmg = ((v_1_cmg1/1000) * (cloruro_magnesio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_cca,"mg/l de cloro")
+            
+        elif base_madre == "Sulfato de magnesio":
+            v_1_smg = ((vol_ferti/1000) * ppm_P) / (sulfato_magnesio[0]*1000)
+            v_1_smg = v_1_smg * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_smg,"ml")
+            v_1_smg1 = (((volumen_ep * cant_plant)/1000) * ppm_P) / (sulfato_magnesio[0]*1000)
+            v_1_smg1 = v_1_smg1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_smg1,"ml")
+            c_2_smg = ((v_1_smg1/1000) * (sulfato_magnesio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_smg,"mg/l de azufre")
+            nutri = "NA"
+            
+        elif base_madre == "Nitrato de magnesio":
+            v_1_nmg = ((vol_ferti/1000) * ppm_N) / (nitrato_magnesio[0]*1000)
+            v_1_nmg = v_1_nmg * 1000
+            print("Volumen total de fertirriego a utilizar por planta durante el ciclo:",v_1_nmg,"ml")
+            v_1_nmg1 = (((volumen_ep * cant_plant)/1000) * ppm_N) / (nitrato_magnesio[0]*1000)
+            v_1_nmg1 = v_1_nmg1 * 1000
+            print("Volumen total de fertirriego a utilizar por día para las",cant_plant,"plantas: ",v_1_nmg1,"ml")
+            c_2_mga = ((v_1_nmg1/1000) * (nitrato_magnesio[1]*1000)) / ((volumen_ep * cant_plant)/1000)
+            print("En la solución se tiene",c_2_nmg,"mg/l de nitrogeno")
+            nutri = "NA" 
+            
+        else:
+            print("La base madre no se encuentra dentro de la base de datos. Intente de nuevo")
+    
+    else:
+        if nutri == "Done" or nutri == "terminé" or nutri == "hecho":
+            print("Gracias por utilizar mi código, espero te haya servido")
+            break
